@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+    composer:install:
+        desc: Permet d'installer les librairies
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server composer install
+
+    composer:require:
+        desc: Permet d'installer une nouvelle librairie
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server composer require {{.CLI_ARGS}}
