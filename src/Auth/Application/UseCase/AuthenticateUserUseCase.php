@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Auth\Application;
+namespace App\Auth\Application\UseCase;
 
 use App\Auth\Domain\Exception\InvalidCredentialsException;
-use App\Auth\Domain\Service\PasswordVerifierInterface;
+use App\Auth\Domain\Service\PasswordHasherInterface;
 use App\User\Domain\Entity\User;
 use App\User\Domain\Repository\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Email;
@@ -11,8 +11,8 @@ use App\User\Domain\ValueObject\Email;
 final class AuthenticateUserUseCase
 {
     public function __construct(
-        private readonly UserRepositoryInterface   $userRepository,
-        private readonly PasswordVerifierInterface $passwordVerifier,
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly PasswordHasherInterface $passwordVerifier,
     )
     {
     }
@@ -28,7 +28,7 @@ final class AuthenticateUserUseCase
             throw new InvalidCredentialsException();
         }
 
-        if (!$this->passwordVerifier->verify($password, $user->passwordHash())) {
+        if (!$this->passwordVerifier->verify($password, $user->getPasswordHash())) {
             throw new InvalidCredentialsException();
         }
 
