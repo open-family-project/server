@@ -42,3 +42,10 @@ tasks:
             - task: :docker:exec
               vars:
                   CLI_ARGS: server php bin/console doctrine:migrations:migrate {{.CLI_ARGS}}
+
+    secret-key:migrate:
+        desc: Génère une clé secrete
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server php -r "echo base64_encode(random_bytes(64));"
