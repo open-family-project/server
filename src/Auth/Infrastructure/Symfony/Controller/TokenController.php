@@ -2,8 +2,10 @@
 
 namespace App\Auth\Infrastructure\Symfony\Controller;
 
+use App\Auth\Application\Presenter\UserToJwtArrayPresenter;
 use App\Auth\Application\UseCase\AuthenticateUserUseCase;
 use App\User\Domain\ValueObject\Email;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -12,6 +14,7 @@ final class TokenController
 {
     public function __construct(
         private AuthenticateUserUseCase $useCase,
+        private UserToJwtArrayPresenter $presenter,
     ) {
     }
 
@@ -25,8 +28,6 @@ final class TokenController
             $data['password'],
         );
 
-        dd($user);
-
-        // création du token plus tard
+        return new JsonResponse($this->presenter->present($user));
     }
 }
