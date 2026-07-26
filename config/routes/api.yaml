@@ -1,0 +1,9 @@
+health_controllers:
+    resource: ../../src/Health/Infrastructure/Controller
+    type: attribute
+    prefix: /api/health
+
+auth_controllers:
+    resource: ../../src/Auth/Infrastructure/Symfony/Controller
+    type: attribute
+    prefix: /api/auth

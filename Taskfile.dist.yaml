@@ -1,0 +1,51 @@
+version: '3'
+
+tasks:
+    composer:install:
+        desc: Permet d'installer les librairies
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server composer install
+
+    composer:require:
+        desc: Permet d'installer une nouvelle librairie
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server composer require {{.CLI_ARGS}}
+
+    composer:remove:
+        desc: Permet de désinstaller une librairie déjà installé
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server composer remove {{.CLI_ARGS}}
+
+    test:database:connection:
+        desc: Verifie si la connexion à la base de données est OK
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server php bin/console dbal:run-sql "SELECT VERSION();"
+
+    migration:generate:
+        desc: Génère une migration
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server php bin/console doctrine:migrations:generate
+
+    migration:migrate:
+        desc: Lance les migrations
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server php bin/console doctrine:migrations:migrate {{.CLI_ARGS}}
+
+    secret-key:migrate:
+        desc: Génère une clé secrete
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server php -r "echo base64_encode(random_bytes(64));"

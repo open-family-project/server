@@ -1,0 +1,23 @@
+meta {
+  name: Token
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/auth/token
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "{{authUser}}",
+    "password": "{{authPassword}}"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

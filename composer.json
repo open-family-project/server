@@ -7,6 +7,11 @@
         "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/dbal": "^4.4",
+        "doctrine/doctrine-bundle": "^3.3",
+        "doctrine/doctrine-migrations-bundle": "^4.0",
+        "doctrine/migrations": "^3.9",
+        "firebase/php-jwt": "^7.1",
         "runtime/roadrunner-symfony-nyholm": "^1.0",
         "symfony/console": "8.1.*",
         "symfony/dotenv": "8.1.*",
@@ -64,7 +69,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "8.1.*"
+            "require": "8.1.*",
+            "docker": false
         }
     }
 }
