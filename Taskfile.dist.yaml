@@ -49,3 +49,10 @@ tasks:
             - task: :docker:exec
               vars:
                   CLI_ARGS: server php -r "echo base64_encode(random_bytes(64));"
+
+    phpstan:
+        desc: Lance l'analyse statique du code avec PHPStan
+        cmds:
+            - task: :docker:exec
+              vars:
+                  CLI_ARGS: server vendor/bin/phpstan analyse

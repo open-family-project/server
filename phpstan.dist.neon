@@ -1,8 +1,20 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+
 parameters:
-    level: 6
+    level: 9
     paths:
         - bin/
         - config/
         - public/
         - src/
-        - tests/
+
+    ignoreErrors:
+        -
+            identifier: method.unused
+            path: src/Kernel.php
+
+    tmpDir: var/phpstan
+
+    symfony:
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
