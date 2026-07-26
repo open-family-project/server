@@ -13,6 +13,9 @@ class UserToJwtArrayPresenter
     {
     }
 
+    /**
+     * @return array<string,string>
+     */
     public function present(User $user): array
     {
         $token = $this->tokenGenerator->generateFromUser($user);

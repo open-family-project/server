@@ -19,10 +19,10 @@ class FirebaseJwtTokenGenerator implements TokenGeneratorInterface
 
     public function generateFromUser(User $user): Token
     {
-        return $this->generate($user->getId(), [
+        return $this->generate((string) $user->getId(), [
             'firstname' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
-            'email' => $user->getEmail(),
+            'email' => $user->getEmail()->value(),
         ]);
     }
 

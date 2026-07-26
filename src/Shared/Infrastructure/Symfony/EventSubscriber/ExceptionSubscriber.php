@@ -10,6 +10,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class ExceptionSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @param array<string, array<string, int|string>> $mapping
+     */
     public function __construct(
         #[Autowire('%exception_mapper%')]
         private readonly array $mapping,
@@ -34,7 +37,7 @@ final class ExceptionSubscriber implements EventSubscriberInterface
                 $event->setResponse(new JsonResponse([
                     'error' => $mapping['error'],
                     'message' => !!$message ? $message : null,
-                ], $mapping['status']));
+                ], (int) $mapping['status']));
             }
         }
     }

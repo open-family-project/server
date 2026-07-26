@@ -7,7 +7,7 @@ use App\User\Domain\ValueObject\Email;
 final class User
 {
     public function __construct(
-        private readonly string $id,
+        private readonly int $id,
         private readonly string $firstname,
         private readonly string $lastname,
         private readonly Email  $email,
@@ -16,7 +16,7 @@ final class User
     {
     }
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }

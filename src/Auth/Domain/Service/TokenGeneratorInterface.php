@@ -9,5 +9,8 @@ interface TokenGeneratorInterface
 {
     public function generateFromUser(User $user): Token;
 
+    /**
+     * @param array<string, string> $claims
+     */
     public function generate(string $subject, array $claims = []): Token;
 }
